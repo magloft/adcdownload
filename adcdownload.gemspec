@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "activesupport", "~> 4.2"
   s.add_runtime_dependency "logging", "~> 2.0"
   s.add_runtime_dependency "commander", "~> 4.3"
-  s.add_runtime_dependency "spaceship", "~> 0.7"
+  s.add_runtime_dependency "spaceship", "~> 0.34"
   s.add_runtime_dependency "http-cookie", "~> 1.0"
   s.add_development_dependency "rspec", "~> 3.3"
   s.add_development_dependency "pry", "~> 0.10"

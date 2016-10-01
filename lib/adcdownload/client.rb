@@ -14,10 +14,10 @@ module ADCDownload
       rescue Errno::ENOENT
       end
       return cached if cached
-
-      landing_url = "https://developer.apple.com/membercenter/index.action"
+      landing_url = "https://developer.apple.com/account/"
       logger.info("GET: " + landing_url)
-      headers = @client.get(landing_url).headers
+      response = @client.get(landing_url)
+      headers = response.headers
       results = headers['location'].match(/.*appIdKey=(\h+)/)
       if (results || []).length > 1
         api_key = results[1]
@@ -30,13 +30,18 @@ module ADCDownload
 
     def get_cookies(user, password)
       jar = HTTP::CookieJar.new(store: :hash, filename: 'cookies.txt')
-      response = request(:post, "https://idmsa.apple.com/IDMSWebAuth/authenticate", {
+      params = {
+        appIdKey: api_key,
+        accNameLocked: "false",
+        language: "US-EN",
+        path: '/account/',
+        rv: "1",
+        Env: "PROD",
         appleId: user,
-        accountPassword: password,
-        appIdKey: api_key
-      })
+        accountPassword: password
+      }
+      response = request(:post, "https://idmsa.apple.com/IDMSWebAuth/authenticate", params)
       jar.parse(response['Set-Cookie'], "http://idmsa.apple.com")
-      
       if response['Set-Cookie'] =~ /myacinfo=(\w+);/
         @cookie = "myacinfo=#{$1};"
       else
