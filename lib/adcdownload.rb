@@ -6,7 +6,6 @@ require "commander"
 require "spaceship"
 require "http-cookie"
 require "json"
-require "pry"
 
 require "adcdownload/version"
 require "adcdownload/client"

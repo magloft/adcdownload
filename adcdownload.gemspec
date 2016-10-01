@@ -19,9 +19,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "commander", "~> 4.3"
   s.add_runtime_dependency "spaceship", "~> 0.34"
   s.add_runtime_dependency "http-cookie", "~> 1.0"
-  s.add_development_dependency "rspec", "~> 3.3"
-  s.add_development_dependency "pry", "~> 0.10"
-  s.add_development_dependency "rubocop", "~> 0.32"
   s.files        = `git ls-files`.split("\n")
   s.executables  = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   s.require_path = 'lib'
